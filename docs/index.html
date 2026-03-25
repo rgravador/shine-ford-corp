@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shine Ford - Project Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Markdown content styles */
+        .markdown-content h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .markdown-content h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #334155;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .markdown-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #475569;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .markdown-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #64748b;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .markdown-content p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            color: #475569;
+        }
+        .markdown-content ul, .markdown-content ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            color: #475569;
+        }
+        .markdown-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        .markdown-content ul li {
+            list-style-type: disc;
+        }
+        .markdown-content ol li {
+            list-style-type: decimal;
+        }
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .markdown-content table th {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+        }
+        .markdown-content table td {
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+        }
+        .markdown-content table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        .markdown-content table tr:hover {
+            background-color: #f1f5f9;
+        }
+        .markdown-content code {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            color: #be185d;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+        .markdown-content pre {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .markdown-content pre code {
+            background: transparent;
+            color: #e2e8f0;
+            padding: 0;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        .markdown-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #64748b;
+            font-style: italic;
+            background-color: #f8fafc;
+            padding: 1rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .markdown-content hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            margin: 2rem 0;
+        }
+        .markdown-content strong {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .markdown-content a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .markdown-content a:hover {
+            text-decoration: underline;
+        }
+        .markdown-content input[type="checkbox"] {
+            margin-right: 0.5rem;
+            accent-color: #3b82f6;
+        }
+
+        /* Tab styles */
+        .tab-btn {
+            transition: all 0.2s ease;
+        }
+        .tab-btn:hover {
+            background-color: #f1f5f9;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Print styles */
+        @media print {
+            .no-print { display: none !important; }
+            .markdown-content { padding: 0 !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-gray-900">Shine Ford</h1>
+                        <p class="text-xs text-gray-500">Booking System Documentation</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="https://rental-wireframes.d2bklufizij10m.amplifyapp.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                        </svg>
+                        Wireframe
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Tab Navigation -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 mb-6 no-print">
+            <div class="flex flex-wrap gap-2 p-2">
+                <button onclick="showTab('requirements')" id="tab-requirements" class="tab-btn active flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    Requirements
+                </button>
+                <button onclick="showTab('technical')" id="tab-technical" class="tab-btn flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm text-gray-600">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                    Technical Spec
+                </button>
+                <button onclick="showTab('proposal')" id="tab-proposal" class="tab-btn flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm text-gray-600">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Client Proposal
+                </button>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 no-print">
+            <div class="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
+                <div class="text-2xl font-bold text-blue-600">₱145,000</div>
+                <div class="text-sm text-gray-500">MVP Cost</div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
+                <div class="text-2xl font-bold text-green-600">9 weeks</div>
+                <div class="text-sm text-gray-500">MVP Timeline</div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
+                <div class="text-2xl font-bold text-purple-600">₱290,000</div>
+                <div class="text-sm text-gray-500">Full Project</div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
+                <div class="text-2xl font-bold text-orange-600">18 weeks</div>
+                <div class="text-sm text-gray-500">Full Timeline</div>
+            </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div id="content-requirements" class="tab-content p-6 md:p-8 markdown-content fade-in"></div>
+            <div id="content-technical" class="tab-content p-6 md:p-8 markdown-content hidden"></div>
+            <div id="content-proposal" class="tab-content p-6 md:p-8 markdown-content hidden"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-gray-500">Shine Ford - Project Documentation</p>
+                <p class="text-sm text-gray-400">Generated with Claude Code</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Document contents
+        const documents = {
+            requirements: `# Heavy Equipment Rental Booking System - Requirements
+
+## Project Overview
+
+| Attribute | Details |
+|-----------|---------|
+| Type | Internal web application |
+| Domain | Heavy equipment rental |
+| Users | 2 admins, 4 staff (6 total) |
+| Client Tech Level | First custom software project |
+
+---
+
+## Current State
+
+**Tools in use:** Google Docs (invoices), Google Sheets (time tracking), Google Drive (customer info)
+
+**Pain points:** Everything is manual - booking, invoicing, time tracking, customer management scattered across multiple tools
+
+---
+
+## Users & Permissions
+
+| Role | Count | Access Level |
+|------|-------|--------------|
+| Admin | 2 | Full access |
+| Staff | 4 | Limited access |
+
+- Internal use only (no customer login)
+- Single office location
+- Desktop only (no mobile required)
+
+---
+
+## Equipment
+
+- **Count:** 20-30 items
+- **Types:** Excavators, loaders, cranes, other construction equipment
+- **Location:** Single depot
+- **Tracking:** Manual check-in/out (no GPS)
+- **Accessories:** Not tracked
+
+---
+
+## Booking Workflow
+
+### Process Flow
+1. Customer requests equipment (phone/office visit)
+2. Staff does site inspection
+3. Customer pays 70% deposit (hourly rate + delivery fee)
+4. Equipment delivered to site
+5. Staff logs actual usage time
+6. Invoice generated and sent
+7. Revenue tracked (payments managed externally)
+
+### Rules
+- **Lead time:** Same day to a few weeks
+- **Modifications:** Allowed
+- **Cancellations:** Allowed, non-refundable
+
+---
+
+## Customers
+
+- Mix of repeat and one-time customers
+- **Data captured:** Name, site address, contact info
+- **Contracts:** Required for each rental
+
+---
+
+## Pricing & Payments
+
+| Item | Details |
+|------|---------|
+| Rate structure | Fixed hourly rate |
+| Seasonal updates | Yes |
+| Delivery/pickup | Per km rate, can be discounted |
+| Deposit | 70% down payment required |
+| Invoicing | Generate and print |
+| Accounting integration | None |
+
+---
+
+## Operators
+
+- Scheduled with equipment on ad-hoc basis
+- No advance scheduling system needed
+
+---
+
+## Notifications
+
+- **In-system reminders:** Yes (rental start/end dates)
+- **Email/SMS:** No
+- **Overdue alerts:** No
+
+---
+
+## Reporting
+
+- **Reports:** Revenue, utilization
+- **Export:** PDF
+- **Access:** Admin and staff
+
+---
+
+## Technical Requirements
+
+| Requirement | Details |
+|-------------|---------|
+| Hosting | AWS Amplify (managed, pay-per-use) |
+| Database | Supabase (PostgreSQL + Auth) |
+| Integrations | None |
+| API | Not needed |
+| Availability | 24/7 |
+| Downtime tolerance | Few hours acceptable |
+| Compliance | None |
+
+---
+
+## Timeline & Budget
+
+- **Timeline:** Flexible, no rush
+- **Budget:** TBD
+- **Priority:** Features over speed/cost
+
+---
+
+## MVP Scope
+
+### Phase 1 - Core System (MVP)
+
+**Goal:** Replace spreadsheets with a single system for bookings, customers, equipment, and invoicing.
+
+| Module | Features |
+|--------|----------|
+| **Auth** | Login, admin/staff roles with permissions |
+| **Equipment** | Add/edit/view equipment, hourly rates, availability status |
+| **Customers** | Add/edit/view customers (name, site address, contact) |
+| **Bookings** | Create/edit/cancel bookings, assign equipment, set dates/hours |
+| **Invoicing** | Generate invoice with hourly charges + delivery, print/PDF |
+| **Payments** | Track 70% deposit, mark as paid, outstanding balance |
+
+### Phase 2 - Enhancements
+
+| Module | Features |
+|--------|----------|
+| **Calendar** | Visual calendar view of all bookings |
+| **Time Tracking** | Log actual hours used per booking |
+| **Operators** | Assign operators to bookings |
+| **Delivery** | Per-km rate calculator with discounts |
+| **Reminders** | In-system alerts for upcoming rentals |
+| **Reports** | Revenue and utilization reports (PDF export) |
+
+### Phase 3 - Future
+
+- Seasonal rate management
+- Contract/agreement templates
+- Dashboard with KPIs
+- Audit logs
+
+---
+
+## MVP Rationale
+
+| Current Pain | MVP Solution |
+|--------------|--------------|
+| Customer info scattered in Drive | Centralized customer database |
+| Bookings tracked in spreadsheets | Booking management with status |
+| Invoices created manually in Docs | Auto-generated invoices |
+| No visibility on equipment availability | Equipment status tracking |
+| Deposit tracking is manual | Payment/deposit tracking |
+
+### Out of Scope for MVP
+- Customer portal
+- Mobile app
+- GPS tracking
+- Email/SMS notifications
+- Accounting integration
+- API access
+- Reports (use database queries initially)
+
+---
+
+## Project Estimate
+
+### Phase 1 - MVP (Core System)
+
+| Module | Tasks | Days |
+|--------|-------|------|
+| **Setup** | Nuxt 3, Supabase, Tailwind, Ant Design Vue, project structure | 2 |
+| **Database** | Schema design, migrations, RLS policies, seed data | 2 |
+| **Auth** | Login/logout, session management, role-based access | 2 |
+| **Equipment** | CRUD, status management, hourly rate, listing/search | 3 |
+| **Customers** | CRUD, contact info, site address, listing/search | 2 |
+| **Bookings** | CRUD, equipment assignment, dates, status workflow | 4 |
+| **Invoicing** | Generate from booking, line items, PDF generation, print | 4 |
+| **Payments** | Record deposit (70%), partial/final payments, balance tracking | 2 |
+| **Layout** | Sidebar, header, responsive layout, navigation | 2 |
+| **Testing** | Manual testing, bug fixes, polish | 3 |
+| **Deployment** | AWS Amplify setup, domain, SSL, production config | 1 |
+| | | |
+| **Phase 1 Total** | | **27 days** |
+
+### Phase 2 - Enhancements
+
+| Module | Tasks | Days |
+|--------|-------|------|
+| **Calendar** | Calendar view, booking visualization, date navigation | 3 |
+| **Time Tracking** | Log actual hours, compare vs estimated | 2 |
+| **Operators** | Operator list, assignment to bookings | 2 |
+| **Delivery** | Per-km calculator, distance input, discount support | 2 |
+| **Reminders** | In-system notifications, upcoming rental alerts | 2 |
+| **Reports** | Revenue report, utilization report, PDF export | 4 |
+| **Testing** | Testing and bug fixes | 2 |
+| | | |
+| **Phase 2 Total** | | **17 days** |
+
+### Phase 3 - Future
+
+| Module | Tasks | Days |
+|--------|-------|------|
+| **Seasonal Rates** | Rate periods, automatic rate switching | 2 |
+| **Contracts** | Template system, PDF generation | 3 |
+| **Dashboard** | KPIs, charts, summary widgets | 3 |
+| **Audit Logs** | Activity tracking, change history | 2 |
+| | | |
+| **Phase 3 Total** | | **10 days** |
+
+---
+
+## Effort Summary
+
+| Phase | Hours | Timeline (4-6 hrs/day) |
+|-------|-------|------------------------|
+| Phase 1 (MVP) | 216 hrs | ~9 weeks |
+| Phase 2 | 136 hrs | ~6 weeks |
+| Phase 3 | 80 hrs | ~3 weeks |
+| **Total** | **432 hrs** | **~18 weeks** |
+
+*Timeline assumes 1 developer working 4-6 hours/day, 5 days/week.*
+
+---
+
+## Monthly Operating Costs
+
+| Service | Cost |
+|---------|------|
+| AWS Amplify | ~$5-15/mo (pay-per-use) |
+| Supabase (Free tier) | $0/mo |
+| Domain (Route 53) | ~$12/yr |
+| **Total** | **~$5-20/mo** |
+
+*Supabase free tier includes 500MB database, 50,000 auth users, sufficient for this project.*
+*AWS Amplify pricing based on build minutes + hosting (typically lower cost for small apps).*
+
+---
+
+## Next Steps
+
+- [x] Complete requirements gathering
+- [x] Identify MVP scope
+- [x] Create technical specification
+- [x] Provide estimate
+- [ ] Client approval
+- [ ] Begin development`,
+
+            technical: `# Heavy Equipment Rental Booking System - Technical Specification
+
+## Technology Stack
+
+| Layer | Technology | Rationale |
+|-------|------------|-----------|
+| Frontend | Nuxt 3 (Vue 3) | SSR, auto-imports, simple deployment |
+| UI Library | Ant Design Vue | Complete component set, tables, forms, calendar |
+| Styling | Tailwind CSS | Utility-first, fast development |
+| Backend | Nuxt Server Routes | Unified codebase, simpler deployment |
+| Database | PostgreSQL (Supabase) | Reliable, managed, free tier available |
+| Data Layer | @nuxtjs/supabase | Direct integration, built-in auth, no ORM overhead |
+| Auth | Supabase Auth | Built-in, session management, row-level security |
+| PDF | pdfmake | Invoice generation |
+| Hosting | AWS Amplify + Supabase | Managed services, pay-per-use, SSR support |
+
+---
+
+## System Architecture
+
+\`\`\`
+┌─────────────────────────────────────────────────────┐
+│                    Frontend                          │
+│            Nuxt 3 (Vue 3 + Ant Design Vue)           │
+└─────────────────────┬───────────────────────────────┘
+                      │ HTTPS
+┌─────────────────────▼───────────────────────────────┐
+│                  API Layer                           │
+│              Nuxt Server Routes                      │
+│            (@nuxtjs/supabase client)                 │
+└─────────────────────┬───────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────┐
+│                   Supabase                           │
+│     PostgreSQL + Auth + Storage + Row Level Security │
+└─────────────────────────────────────────────────────┘
+\`\`\`
+
+---
+
+## Database Schema
+
+> Managed via Supabase Dashboard or SQL migrations. Auth handled by Supabase Auth.
+
+### Profiles (extends Supabase Auth)
+\`\`\`sql
+profiles
+├── id              UUID PRIMARY KEY REFERENCES auth.users(id)
+├── name            VARCHAR(100) NOT NULL
+├── role            VARCHAR(20) CHECK (role IN ('admin', 'staff'))
+├── is_active       BOOLEAN DEFAULT true
+├── created_at      TIMESTAMPTZ DEFAULT NOW()
+└── updated_at      TIMESTAMPTZ
+\`\`\`
+
+### Equipment
+\`\`\`sql
+equipment
+├── id              UUID PRIMARY KEY
+├── name            VARCHAR(100) NOT NULL
+├── type            VARCHAR(50) NOT NULL
+├── description     TEXT
+├── hourly_rate     DECIMAL(10,2) NOT NULL
+├── status          ENUM('available', 'rented', 'maintenance') DEFAULT 'available'
+├── created_at      TIMESTAMP DEFAULT NOW()
+└── updated_at      TIMESTAMP
+\`\`\`
+
+### Customers
+\`\`\`sql
+customers
+├── id              UUID PRIMARY KEY
+├── name            VARCHAR(100) NOT NULL
+├── contact_person  VARCHAR(100)
+├── phone           VARCHAR(20)
+├── email           VARCHAR(255)
+├── site_address    TEXT
+├── notes           TEXT
+├── created_at      TIMESTAMP DEFAULT NOW()
+└── updated_at      TIMESTAMP
+\`\`\`
+
+### Bookings
+\`\`\`sql
+bookings
+├── id              UUID PRIMARY KEY
+├── booking_number  VARCHAR(20) UNIQUE NOT NULL
+├── customer_id     UUID REFERENCES customers(id)
+├── equipment_id    UUID REFERENCES equipment(id)
+├── start_date      DATE NOT NULL
+├── end_date        DATE NOT NULL
+├── estimated_hours INT NOT NULL
+├── actual_hours    INT
+├── hourly_rate     DECIMAL(10,2) NOT NULL
+├── delivery_fee    DECIMAL(10,2) DEFAULT 0
+├── delivery_km     DECIMAL(10,2)
+├── status          ENUM('pending', 'confirmed', 'in_progress', 'completed', 'cancelled')
+├── notes           TEXT
+├── created_by      UUID REFERENCES users(id)
+├── created_at      TIMESTAMP DEFAULT NOW()
+└── updated_at      TIMESTAMP
+\`\`\`
+
+### Invoices
+\`\`\`sql
+invoices
+├── id              UUID PRIMARY KEY
+├── invoice_number  VARCHAR(20) UNIQUE NOT NULL
+├── booking_id      UUID REFERENCES bookings(id)
+├── customer_id     UUID REFERENCES customers(id)
+├── subtotal        DECIMAL(12,2) NOT NULL
+├── delivery_fee    DECIMAL(10,2) DEFAULT 0
+├── total           DECIMAL(12,2) NOT NULL
+├── status          ENUM('draft', 'sent', 'paid', 'partial') DEFAULT 'draft'
+├── issued_date     DATE NOT NULL
+├── due_date        DATE
+├── created_at      TIMESTAMP DEFAULT NOW()
+└── updated_at      TIMESTAMP
+\`\`\`
+
+### Payments
+\`\`\`sql
+payments
+├── id              UUID PRIMARY KEY
+├── invoice_id      UUID REFERENCES invoices(id)
+├── amount          DECIMAL(12,2) NOT NULL
+├── payment_type    ENUM('deposit', 'partial', 'final') NOT NULL
+├── payment_date    DATE NOT NULL
+├── notes           TEXT
+├── recorded_by     UUID REFERENCES users(id)
+├── created_at      TIMESTAMP DEFAULT NOW()
+└── updated_at      TIMESTAMP
+\`\`\`
+
+### Entity Relationships
+\`\`\`
+users ─────────────────┐
+                       │
+customers ◄────────────┼──── bookings ────► equipment
+     │                 │         │
+     │                 │         │
+     └────► invoices ◄─┘         │
+                │                │
+                ▼                │
+            payments             │
+                                 │
+                       operators ┘ (Phase 2)
+\`\`\`
+
+---
+
+## API Endpoints
+
+### Authentication
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /api/auth/login | User login |
+| POST | /api/auth/logout | User logout |
+| GET | /api/auth/me | Get current user |
+
+### Users (Admin only)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /api/users | List all users |
+| POST | /api/users | Create user |
+| GET | /api/users/:id | Get user details |
+| PUT | /api/users/:id | Update user |
+| DELETE | /api/users/:id | Deactivate user |
+
+### Equipment
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /api/equipment | List equipment |
+| POST | /api/equipment | Add equipment |
+| GET | /api/equipment/:id | Get equipment details |
+| PUT | /api/equipment/:id | Update equipment |
+| DELETE | /api/equipment/:id | Remove equipment |
+| GET | /api/equipment/available | List available equipment |
+
+### Customers
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /api/customers | List customers |
+| POST | /api/customers | Add customer |
+| GET | /api/customers/:id | Get customer details |
+| PUT | /api/customers/:id | Update customer |
+| GET | /api/customers/:id/bookings | Customer booking history |
+
+### Bookings
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /api/bookings | List bookings |
+| POST | /api/bookings | Create booking |
+| GET | /api/bookings/:id | Get booking details |
+| PUT | /api/bookings/:id | Update booking |
+| PATCH | /api/bookings/:id/status | Update booking status |
+| PATCH | /api/bookings/:id/hours | Log actual hours |
+
+### Invoices
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /api/invoices | List invoices |
+| POST | /api/invoices | Create invoice |
+| GET | /api/invoices/:id | Get invoice details |
+| GET | /api/invoices/:id/pdf | Generate PDF |
+| PATCH | /api/invoices/:id/status | Update invoice status |
+
+### Payments
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /api/payments | List payments |
+| POST | /api/payments | Record payment |
+| GET | /api/invoices/:id/payments | Get invoice payments |
+
+---
+
+## UI Components
+
+### Pages (MVP)
+
+| Page | Route | Description |
+|------|-------|-------------|
+| Login | /login | Authentication |
+| Dashboard | / | Overview, quick actions |
+| Equipment | /equipment | List, add, edit equipment |
+| Customers | /customers | List, add, edit customers |
+| Bookings | /bookings | List, add, edit bookings |
+| Booking Detail | /bookings/:id | View/edit single booking |
+| Invoices | /invoices | List, create invoices |
+| Invoice Detail | /invoices/:id | View invoice, record payment |
+| Users | /users | User management (admin only) |
+
+### Key Components
+
+\`\`\`
+components/
+├── layout/
+│   ├── AppLayout.vue        # Main layout with sidebar
+│   ├── Sidebar.vue          # Navigation menu
+│   └── Header.vue           # Top bar with user info
+├── equipment/
+│   ├── EquipmentTable.vue   # Equipment list
+│   ├── EquipmentForm.vue    # Add/edit form
+│   └── EquipmentStatus.vue  # Status badge
+├── customers/
+│   ├── CustomerTable.vue    # Customer list
+│   ├── CustomerForm.vue     # Add/edit form
+│   └── CustomerSelect.vue   # Dropdown selector
+├── bookings/
+│   ├── BookingTable.vue     # Booking list
+│   ├── BookingForm.vue      # Add/edit form
+│   ├── BookingStatus.vue    # Status badge
+│   └── HoursLogger.vue      # Log actual hours
+├── invoices/
+│   ├── InvoiceTable.vue     # Invoice list
+│   ├── InvoiceDetail.vue    # Invoice view
+│   ├── InvoicePDF.vue       # PDF template
+│   └── PaymentForm.vue      # Record payment
+└── common/
+    ├── DataTable.vue        # Reusable table
+    ├── SearchInput.vue      # Search component
+    ├── StatusBadge.vue      # Status indicator
+    └── ConfirmModal.vue     # Confirmation dialog
+\`\`\`
+
+---
+
+## Security
+
+### Authentication
+- Supabase Auth with email/password
+- Secure HTTP-only cookies (managed by Supabase)
+- Password hashing handled by Supabase (bcrypt)
+
+### Authorization
+| Role | Permissions |
+|------|-------------|
+| Admin | Full CRUD on all resources, user management |
+| Staff | CRUD on bookings, customers, invoices; Read equipment |
+
+- Row Level Security (RLS) policies in Supabase
+- Role stored in \`profiles\` table, checked via RLS
+
+### Data Protection
+- HTTPS enforced
+- Input validation on all endpoints (Zod)
+- SQL injection prevention via parameterized queries
+- XSS prevention via Vue's default escaping
+- CSRF protection via Supabase Auth
+
+---
+
+## Deployment
+
+### Infrastructure
+
+\`\`\`
+┌─────────────────┐     ┌─────────────────┐
+│   AWS Amplify   │     │    Supabase     │
+│   (Frontend +   │────▶│  (PostgreSQL +  │
+│   SSR/API)      │     │   Auth)         │
+└─────────────────┘     └─────────────────┘
+\`\`\`
+
+### Environment Variables
+\`\`\`env
+# Supabase
+SUPABASE_URL=https://xxx.supabase.co
+SUPABASE_KEY=eyJ...                    # anon/public key
+SUPABASE_SERVICE_KEY=eyJ...            # service role key (server only)
+
+# App
+NUXT_PUBLIC_APP_NAME="Equipment Rental"
+\`\`\`
+
+### CI/CD
+- GitHub repository
+- AWS Amplify auto-deploy on push to main
+- Preview deployments for PRs (branch deployments)
+
+### Estimated Costs (Monthly)
+| Service | Tier | Cost |
+|---------|------|------|
+| AWS Amplify | Pay-per-use | ~$5-15 |
+| Supabase | Free | $0 |
+| Domain (Route 53) | - | ~$1 |
+| **Total** | | **~$6-20/mo** |
+
+*Amplify pricing: $0.01/build minute, $0.15/GB served, free tier includes 1000 build mins + 15GB/mo*
+
+---
+
+## Project Structure
+
+\`\`\`
+├── components/             # Vue components (auto-imported)
+│   ├── layout/
+│   ├── equipment/
+│   ├── customers/
+│   ├── bookings/
+│   ├── invoices/
+│   └── common/
+├── composables/            # Vue composables (auto-imported)
+│   ├── useEquipment.ts
+│   ├── useCustomers.ts
+│   ├── useBookings.ts
+│   └── useInvoices.ts
+├── layouts/
+│   ├── default.vue        # Main authenticated layout
+│   └── auth.vue           # Login layout
+├── middleware/
+│   └── auth.ts            # Route protection
+├── pages/                  # File-based routing
+│   ├── index.vue          # Dashboard
+│   ├── login.vue
+│   ├── equipment/
+│   │   ├── index.vue
+│   │   └── [id].vue
+│   ├── customers/
+│   │   ├── index.vue
+│   │   └── [id].vue
+│   ├── bookings/
+│   │   ├── index.vue
+│   │   └── [id].vue
+│   ├── invoices/
+│   │   ├── index.vue
+│   │   └── [id].vue
+│   └── users/
+│       └── index.vue
+├── server/                 # Nuxt server routes
+│   ├── api/
+│   │   ├── equipment/
+│   │   ├── customers/
+│   │   ├── bookings/
+│   │   ├── invoices/
+│   │   └── payments/
+│   └── utils/
+│       └── supabase.ts    # Server-side Supabase client
+├── stores/                 # Pinia stores
+│   └── ui.ts
+├── types/
+│   ├── database.ts        # Generated Supabase types
+│   └── index.ts
+├── supabase/
+│   ├── migrations/        # SQL migrations
+│   └── seed.sql           # Seed data
+└── nuxt.config.ts
+\`\`\`
+
+---
+
+## Development Phases
+
+### Phase 1 - MVP (Core)
+1. Project setup (Nuxt 3, Supabase, Tailwind, Ant Design Vue)
+2. Supabase project setup + database schema
+3. Authentication (Supabase Auth + RLS policies)
+4. Equipment CRUD
+5. Customer CRUD
+6. Booking CRUD
+7. Invoice generation + PDF
+8. Payment tracking
+9. Testing and deployment
+
+### Phase 2 - Enhancements
+1. Calendar view (Ant Design Vue Calendar)
+2. Time tracking improvements
+3. Operator assignment
+4. Delivery fee calculator
+5. In-system reminders
+6. Reports (revenue, utilization)
+
+### Phase 3 - Future
+1. Seasonal rate management
+2. Contract templates
+3. Dashboard with KPIs
+4. Audit logs`,
+
+            proposal: `# Project Proposal
+## Heavy Equipment Rental Booking System
+
+---
+
+**Prepared for:** [Client Name]
+
+**Prepared by:** [Developer Name]
+
+**Date:** [Date]
+
+**Valid until:** [Date + 30 days]
+
+---
+
+## Executive Summary
+
+This proposal outlines the development of a custom web-based booking system designed to streamline your heavy equipment rental operations. The system will replace your current manual processes (spreadsheets, Google Docs, phone-based coordination) with a centralized platform for managing equipment, customers, bookings, invoicing, and payments.
+
+### Key Benefits
+
+| Current Problem | Solution |
+|-----------------|----------|
+| Customer info scattered in Drive | Centralized customer database |
+| Bookings tracked in spreadsheets | Booking system with status tracking |
+| Invoices created manually in Docs | Auto-generated invoices with PDF export |
+| No visibility on equipment availability | Real-time equipment status and availability |
+| Deposit tracking is manual | Payment tracking with balance due alerts |
+
+---
+
+## Understanding Your Needs
+
+### Current Challenges
+
+| Challenge | Impact |
+|-----------|--------|
+| Booking management via spreadsheets | Time-consuming, prone to errors |
+| Customer info scattered across Google Drive | Difficult to track history |
+| Invoices created manually in Google Docs | Inconsistent, slow process |
+| No visibility on equipment availability | Risk of double-booking |
+| Deposit tracking is manual | Missed payments, cash flow issues |
+
+### Business Requirements
+
+- 20-30 heavy equipment items (excavators, loaders, cranes)
+- 6 users (2 admins, 4 staff) with different access levels
+- Hourly rental rates with 70% deposit requirement
+- Delivery/pickup charged per kilometer
+- Invoice generation and printing capability
+- Internal use only (no customer portal needed)
+
+---
+
+## Proposed Solution
+
+A modern, cloud-based booking system with the following capabilities:
+
+### Core Features
+
+| Module | Description |
+|--------|-------------|
+| **User Management** | Secure login with admin and staff roles |
+| **Equipment Catalog** | Track 20-30 equipment items, hourly rates, and availability status |
+| **Customer Database** | Centralized customer records with contact info and site addresses |
+| **Booking Management** | Create, modify, and cancel bookings with 6-stage status workflow |
+| **Contract Tracking** | "Contract signed" checkbox required before equipment delivery |
+| **Invoicing** | Auto-numbered invoices (INV-2026-0001) with print and PDF export |
+| **Payment Tracking** | Record 70% deposits, partial payments, and final payments |
+
+### Booking Workflow
+
+Your bookings will follow a clear status progression:
+
+\`\`\`
+Request → Site Inspection → Deposit Paid → Delivery → In Use → Completed
+\`\`\`
+
+Each stage is tracked in the system, so you always know where every booking stands.
+
+### User Permissions
+
+| Action | Admin | Staff |
+|--------|-------|-------|
+| View all records | Yes | Yes |
+| Create/edit records | Yes | Yes |
+| Delete records | Yes | No |
+| Manage users | Yes | No |
+| Change equipment rates | Yes | No |
+
+### Technical Approach
+
+| Component | Technology |
+|-----------|------------|
+| Frontend | Nuxt 3 (Vue.js) with Ant Design Vue |
+| Backend | Nuxt Server Routes |
+| Database | PostgreSQL (Supabase) |
+| Authentication | Supabase Auth with role-based access |
+| Hosting | AWS Amplify |
+| PDF Generation | pdfmake |
+
+### Why This Stack?
+
+- **Low maintenance** - Managed services, no server administration needed
+- **Secure** - Built-in authentication and database security
+- **Scalable** - Can grow with your business
+- **Cost-effective** - Pay-per-use hosting model
+
+---
+
+## Scope of Work
+
+### Phase 1: Core System (MVP)
+
+| Module | Deliverables |
+|--------|--------------|
+| **Setup** | Project setup, database design, deployment to AWS Amplify |
+| **Authentication** | Login system, admin/staff roles, permission controls |
+| **Equipment** | Add, edit, view equipment with hourly rates and 4 status types (Available, Rented, Maintenance, Retired) |
+| **Customers** | Add, edit, view customers with contact details and site addresses |
+| **Bookings** | Create, modify, cancel bookings with 6-stage workflow, equipment availability checking, contract checkbox |
+| **Invoicing** | Auto-numbered invoices, calculate totals (hours × rate + delivery), print and PDF export |
+| **Payments** | Record 70% deposits, partial and final payments, track outstanding balances |
+| **Dashboard** | Overview of recent bookings, pending actions, outstanding invoices |
+| **Search** | Find equipment, customers, and bookings quickly |
+
+### Phase 2: Enhancements (Optional)
+
+| Module | Deliverables |
+|--------|--------------|
+| **Calendar View** | Visual month/week/day calendar of all bookings, drag-and-drop rescheduling |
+| **Time Tracking** | Log actual hours per rental, compare actual vs estimated hours |
+| **Operators** | Manage operator list, assign operators to bookings, view operator schedule |
+| **Delivery Calculator** | Configurable per-km rates with discount thresholds, auto-calculate fees |
+| **Reminders** | Bell notifications for booking start/end dates, custom reminders |
+| **Reports** | Revenue report with charts, equipment utilization report, PDF export |
+
+### Phase 3: Future Enhancements (Optional)
+
+- Seasonal rate management
+- Contract/agreement templates
+- Dashboard with KPIs
+- Audit logs
+
+---
+
+## Project Timeline
+
+*Developer works 4-6 hours per day, 5 days per week.*
+
+### Visual Timeline
+
+\`\`\`
+Phase 1: MVP (9 weeks)
+══════════════════════════════════════════════════════════════
+Week 1-2    │ Week 3-4    │ Week 5-6    │ Week 7-8    │ Week 9
+────────────┼─────────────┼─────────────┼─────────────┼─────────
+Setup       │ Equipment   │ Booking     │ Invoicing   │ Testing
+Database    │ Customers   │ Management  │ Payments    │ Deploy
+Auth        │             │             │ Dashboard   │
+══════════════════════════════════════════════════════════════
+
+Phase 2: Enhancements (6 weeks)
+══════════════════════════════════════════════════════════════
+Week 10-11  │ Week 12-13  │ Week 14-15
+────────────┼─────────────┼─────────────
+Calendar    │ Operators   │ Reports
+Time Track  │ Delivery    │ Testing
+            │ Reminders   │ Deploy
+══════════════════════════════════════════════════════════════
+\`\`\`
+
+### Phase 1: MVP (9 weeks)
+
+| Week | Activities |
+|------|------------|
+| Week 1-2 | Project setup, database design, authentication, user permissions |
+| Week 3-4 | Equipment module (CRUD, rates, status), Customer module (CRUD, contacts) |
+| Week 5-6 | Booking management (workflow, availability check, contract checkbox) |
+| Week 7-8 | Invoicing (auto-numbering, PDF), Payment tracking (deposits, balances) |
+| Week 9 | Dashboard, search, testing, bug fixes, deployment to production |
+
+**Deliverable: Fully functional booking system ready for daily use**
+
+### Phase 2: Enhancements (6 weeks)
+
+| Week | Activities |
+|------|------------|
+| Week 10-11 | Calendar view (month/week/day), Time tracking (actual vs estimated) |
+| Week 12-13 | Operator management and assignment, Delivery calculator with discounts |
+| Week 14-15 | Reminder system, Revenue and utilization reports, testing, deployment |
+
+**Deliverable: Enhanced system with visual calendar, reports, and operator scheduling**
+
+### Phase 3: Future Features (3 weeks)
+
+| Week | Activities |
+|------|------------|
+| Week 16-17 | Seasonal rate management, Contract templates with PDF generation |
+| Week 18 | KPI dashboard, Audit logs, final polish and handover |
+
+**Deliverable: Complete system with advanced features**
+
+---
+
+## Investment
+
+### Option A: MVP Only (Recommended to Start)
+
+| Item | Amount | Timeline |
+|------|--------|----------|
+| Phase 1 Development | ₱145,000 | 9 weeks |
+| **Total** | **₱145,000** | **9 weeks** |
+
+### Option B: Full Project (All Phases)
+
+| Item | Amount | Timeline |
+|------|--------|----------|
+| Phase 1 - Core System | ₱145,000 | 9 weeks |
+| Phase 2 - Enhancements | ₱91,000 | 6 weeks |
+| Phase 3 - Future Features | ₱54,000 | 3 weeks |
+| **Total** | **₱290,000** | **18 weeks** |
+
+### Monthly Operating Costs (After Launch)
+
+| Service | Cost | Notes |
+|---------|------|-------|
+| AWS Amplify (hosting) | ~₱280-840/mo | Pay-per-use, scales with traffic |
+| Supabase (database) | ₱0/mo | Free tier sufficient for 6 users |
+| Domain (optional) | ~₱56/mo | If you want a custom domain |
+| **Total** | **~₱280-900/mo** | |
+
+*The free tier of Supabase includes 500MB database storage and 50,000 auth users - more than enough for your needs. If usage grows significantly, Supabase Pro is $25/mo (~₱1,400/mo).*
+
+---
+
+## Payment Terms
+
+### Option A: MVP Only
+
+| Milestone | % | Amount | When |
+|-----------|---|--------|------|
+| Project Kickoff | 50% | ₱72,500 | Upon contract signing |
+| Project Completion | 50% | ₱72,500 | Upon delivery and acceptance |
+| **Total** | | **₱145,000** | |
+
+### Option B: Full Project
+
+| Milestone | % | Amount | When |
+|-----------|---|--------|------|
+| Project Kickoff | 30% | ₱87,000 | Upon contract signing |
+| MVP Completion | 40% | ₱116,000 | Phase 1 delivered and accepted |
+| Phase 2 Completion | 20% | ₱58,000 | Phase 2 delivered and accepted |
+| Final Delivery | 10% | ₱29,000 | Phase 3 delivered and accepted |
+| **Total** | | **₱290,000** | |
+
+---
+
+## What's Included
+
+| Category | Details |
+|----------|---------|
+| Development | Complete frontend (Nuxt 3/Vue) and backend (Supabase) development |
+| Database | PostgreSQL database with secure access controls per user role |
+| Deployment | AWS Amplify hosting with HTTPS, Supabase cloud database |
+| Security | Role-based permissions (admin vs staff), secure login system |
+| Testing | Functional testing of all features, bug fixes before delivery |
+| Documentation | Basic user guide with screenshots |
+| Support | Bug fixes during development period |
+| Revisions | Up to 2 rounds of revisions per phase |
+| Training | 1-hour online walkthrough session after each phase delivery |
+
+## What's Not Included
+
+| Item | Notes |
+|------|-------|
+| Post-launch support | Available as separate maintenance agreement |
+| Major scope changes | Will require change request and new estimate |
+| Extended training | Additional on-site or remote training sessions |
+| Data migration | Migration from existing spreadsheets (see below) |
+| Third-party fees | AWS, Supabase, domain registration |
+| Content creation | Logo, images, copywriting |
+
+---
+
+## Data Migration (Optional Add-On)
+
+If you want to import your existing data from Google Sheets into the new system:
+
+| Scope | Cost | What's Included |
+|-------|------|-----------------|
+| Basic Migration | ₱15,000 | Import equipment list and customer list (up to 500 records) |
+| Full Migration | ₱30,000 | Import equipment, customers, and historical bookings (up to 2,000 records) |
+
+*Migration includes data cleaning, validation, and verification before go-live. We'll review your existing spreadsheets to provide an accurate quote.*
+
+---
+
+## Post-Launch Support (Optional)
+
+| Package | Coverage | Monthly Cost |
+|---------|----------|--------------|
+| Basic | Bug fixes, minor updates (up to 4 hrs/mo) | ₱5,000/mo |
+| Standard | Bug fixes, updates, priority support (up to 8 hrs/mo) | ₱10,000/mo |
+| Premium | All support, feature enhancements (up to 16 hrs/mo) | ₱18,000/mo |
+
+---
+
+## Why Work With Me
+
+| Benefit | Description |
+|---------|-------------|
+| **Single Point of Contact** | Direct communication, no middlemen |
+| **Full-Stack Expertise** | 6 years experience in frontend, backend, and DevOps |
+| **End-to-End Delivery** | From requirements to deployment |
+| **Quality Focus** | Clean code, tested functionality |
+| **Transparent Process** | Regular updates and progress reports |
+
+---
+
+## Next Steps
+
+1. **Review** this proposal and let me know if you have questions
+2. **Confirm** scope and preferred option (MVP or Full Project)
+3. **Sign** the project agreement
+4. **Pay** the initial milestone payment
+5. **Kickoff** meeting to finalize requirements and begin development
+
+---
+
+## Agreement
+
+By signing below, both parties agree to the terms outlined in this proposal.
+
+**Option Selected:** [ ] MVP Only (₱145,000) / [ ] Full Project (₱290,000)
+
+---
+
+**Client**
+
+Name: _______________________
+
+Signature: _______________________
+
+Date: _______________________
+
+---
+
+**Developer**
+
+Name: _______________________
+
+Signature: _______________________
+
+Date: _______________________
+
+---
+
+## Contact
+
+| | |
+|---|---|
+| **Developer** | [Your Name] |
+| **Email** | [your.email@example.com] |
+| **Phone** | [+63 XXX XXX XXXX] |
+
+---
+
+*This proposal is valid for 30 days from the date of issue.*`
+        };
+
+        // Initialize marked with options
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // Render initial content
+        document.getElementById('content-requirements').innerHTML = marked.parse(documents.requirements);
+
+        // Tab switching function
+        function showTab(tabName) {
+            // Hide all content
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+
+            // Remove active state from all buttons
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active');
+                el.classList.add('text-gray-600');
+            });
+
+            // Show selected content
+            const contentEl = document.getElementById('content-' + tabName);
+            contentEl.classList.remove('hidden');
+            contentEl.classList.add('fade-in');
+
+            // Render markdown if not already rendered
+            if (!contentEl.dataset.rendered) {
+                contentEl.innerHTML = marked.parse(documents[tabName]);
+                contentEl.dataset.rendered = 'true';
+            }
+
+            // Add active state to selected button
+            const tabBtn = document.getElementById('tab-' + tabName);
+            tabBtn.classList.add('active');
+            tabBtn.classList.remove('text-gray-600');
+        }
+    </script>
+</body>
+</html>
