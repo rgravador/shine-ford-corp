@@ -72,11 +72,13 @@ function handleNavClick(item: NavigationItem) {
   top: 0;
   bottom: 0;
   width: 260px;
-  background: linear-gradient(180deg, var(--color-slate-900) 0%, var(--color-slate-950) 100%);
+  background: var(--bg-sidebar-gradient);
+  border-right: 1px solid var(--sidebar-border);
   display: flex;
   flex-direction: column;
   z-index: 100;
-  box-shadow: 4px 0 24px rgb(0 0 0 / 0.1);
+  box-shadow: var(--sidebar-shadow);
+  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 /* Logo */
@@ -86,7 +88,7 @@ function handleNavClick(item: NavigationItem) {
   align-items: center;
   justify-content: center;
   padding: 0 16px;
-  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  border-bottom: 1px solid var(--sidebar-border);
   margin-bottom: 8px;
 }
 
@@ -112,24 +114,24 @@ function handleNavClick(item: NavigationItem) {
   margin-bottom: 4px;
   border-radius: 10px;
   cursor: pointer;
-  color: var(--color-slate-400);
+  color: var(--sidebar-text);
   transition: all var(--transition-fast);
   gap: 14px;
   overflow: hidden;
 }
 
 .sidebar__nav-item:hover {
-  background: rgb(255 255 255 / 0.06);
-  color: white;
+  background: var(--bg-sidebar-hover);
+  color: var(--sidebar-text-hover);
 }
 
 .sidebar__nav-item--active {
-  background: rgb(255 255 255 / 0.1);
-  color: white;
+  background: var(--bg-sidebar-active);
+  color: var(--sidebar-text-active);
 }
 
 .sidebar__nav-item--active .sidebar__nav-icon {
-  color: var(--color-amber-400);
+  color: var(--color-amber-500);
 }
 
 .sidebar__nav-icon {

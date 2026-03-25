@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Dropdown, Avatar, Badge } from 'ant-design-vue'
 import {
-  UserOutlined,
   LogoutOutlined,
   SettingOutlined,
   BellOutlined,
@@ -10,6 +9,13 @@ import {
 
 const user = useSupabaseUser()
 const client = useSupabaseClient()
+const colorMode = useColorMode()
+
+const isDark = computed(() => colorMode.value === 'dark')
+
+function toggleTheme() {
+  colorMode.preference = isDark.value ? 'light' : 'dark'
+}
 
 async function handleLogout() {
   await client.auth.signOut()
@@ -40,6 +46,26 @@ const userInitials = computed(() => {
 
     <!-- Right section -->
     <div class="app-header__right">
+      <!-- Theme toggle -->
+      <button class="app-header__icon-btn app-header__theme-toggle" @click="toggleTheme" :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+        <!-- Moon icon (show in light mode) -->
+        <svg v-if="!isDark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <!-- Sun icon (show in dark mode) -->
+        <svg v-else xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-header__sun-icon">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+
       <!-- Notifications -->
       <button class="app-header__icon-btn">
         <Badge :count="3" :offset="[-2, 2]">
@@ -88,7 +114,7 @@ const userInitials = computed(() => {
 <style scoped>
 .app-header {
   height: 72px;
-  background: white;
+  background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -97,6 +123,7 @@ const userInitials = computed(() => {
   position: sticky;
   top: 0;
   z-index: 50;
+  transition: background var(--transition-base), border-color var(--transition-base);
 }
 
 .app-header__left {
@@ -122,8 +149,8 @@ const userInitials = computed(() => {
   width: 100%;
   height: 44px;
   padding: 0 80px 0 44px;
-  background: var(--color-slate-100);
-  border: 1px solid transparent;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   font-size: 0.9375rem;
   color: var(--text-primary);
@@ -136,20 +163,20 @@ const userInitials = computed(() => {
 
 .app-header__search-input:focus {
   outline: none;
-  background: white;
-  border-color: var(--color-slate-300);
-  box-shadow: 0 0 0 3px rgb(148 163 184 / 0.1);
+  background: var(--bg-card);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgb(245 158 11 / 0.15);
 }
 
 .app-header__search-kbd {
   position: absolute;
   right: 12px;
   padding: 4px 8px;
-  background: white;
-  border: 1px solid var(--color-slate-200);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-family: var(--font-sans);
 }
 
@@ -178,6 +205,18 @@ const userInitials = computed(() => {
 .app-header__icon-btn:hover {
   background: var(--color-slate-100);
   color: var(--text-primary);
+}
+
+.app-header__theme-toggle {
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.app-header__theme-toggle:hover {
+  transform: rotate(15deg);
+}
+
+.app-header__sun-icon {
+  color: var(--color-amber-400);
 }
 
 /* User section */
@@ -221,7 +260,7 @@ const userInitials = computed(() => {
 
 /* Dropdown */
 .app-header__dropdown {
-  background: white;
+  background: var(--bg-secondary);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-color);

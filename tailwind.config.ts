@@ -8,6 +8,7 @@ export default {
     './app/plugins/**/*.{js,ts}',
     './app/app.vue',
   ],
+  darkMode: 'class',
   corePlugins: {
     // Disable preflight to avoid conflicts with Ant Design Vue
     preflight: false,

@@ -245,7 +245,7 @@ function getStatusClass(status: string) {
 
 /* Stat Card */
 .stat-card {
-  background: white;
+  background: var(--bg-card);
   border-radius: var(--border-radius-lg);
   padding: 24px;
   display: flex;
@@ -388,13 +388,13 @@ function getStatusClass(status: string) {
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  background: var(--color-slate-50);
+  background: var(--bg-primary);
   border-radius: var(--border-radius-sm);
   transition: background var(--transition-fast);
 }
 
 .booking-item:hover {
-  background: var(--color-slate-100);
+  background: var(--bg-secondary);
 }
 
 .booking-item__info {
@@ -468,14 +468,14 @@ function getStatusClass(status: string) {
   align-items: center;
   gap: 16px;
   padding: 16px;
-  background: var(--color-slate-50);
+  background: var(--bg-primary);
   border-radius: var(--border-radius-sm);
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .action-item:hover {
-  background: var(--color-slate-100);
+  background: var(--bg-secondary);
 }
 
 .action-item:hover .action-item__check {

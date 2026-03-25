@@ -75,9 +75,18 @@
   /* Semantic tokens */
   --bg-primary: var(--color-slate-50);
   --bg-secondary: #ffffff;
-  --bg-sidebar: var(--color-slate-900);
-  --bg-sidebar-hover: var(--color-slate-800);
+  --bg-sidebar: #ffffff;
+  --bg-sidebar-gradient: linear-gradient(180deg, #ffffff 0%, var(--color-slate-50) 100%);
+  --bg-sidebar-hover: var(--color-slate-100);
+  --bg-sidebar-active: var(--color-slate-200);
   --bg-card: #ffffff;
+
+  /* Sidebar specific */
+  --sidebar-text: var(--color-slate-600);
+  --sidebar-text-hover: var(--color-slate-900);
+  --sidebar-text-active: var(--color-slate-900);
+  --sidebar-border: var(--color-slate-200);
+  --sidebar-shadow: 4px 0 24px rgb(0 0 0 / 0.05);
 
   --text-primary: var(--color-slate-900);
   --text-secondary: var(--color-slate-600);
@@ -109,6 +118,51 @@
   --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dark mode variables */
+.dark {
+  --color-slate-950: #fafbfc;
+  --color-slate-900: #f8fafc;
+  --color-slate-800: #f1f5f9;
+  --color-slate-700: #e2e8f0;
+  --color-slate-600: #cbd5e1;
+  --color-slate-500: #94a3b8;
+  --color-slate-400: #64748b;
+  --color-slate-300: #475569;
+  --color-slate-200: #334155;
+  --color-slate-100: #1e293b;
+  --color-slate-50: #0f172a;
+
+  /* Semantic tokens - dark mode */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-sidebar: #0f172a;
+  --bg-sidebar-gradient: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  --bg-sidebar-hover: rgb(255 255 255 / 0.06);
+  --bg-sidebar-active: rgb(255 255 255 / 0.1);
+  --bg-card: #1e293b;
+
+  /* Sidebar specific - dark mode */
+  --sidebar-text: #94a3b8;
+  --sidebar-text-hover: #ffffff;
+  --sidebar-text-active: #ffffff;
+  --sidebar-border: rgb(255 255 255 / 0.06);
+  --sidebar-shadow: 4px 0 24px rgb(0 0 0 / 0.2);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f172a;
+
+  --border-color: rgb(255 255 255 / 0.08);
+
+  /* Shadows - adjusted for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3), 0 1px 3px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.2);
+  --shadow-card-hover: 0 10px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+}
+
 /* Base styles */
 html {
   font-family: var(--font-sans);
@@ -119,6 +173,12 @@ html {
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Smooth transitions for theme changes */
+*, *::before, *::after {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 /* Headings use display font */
@@ -158,7 +218,8 @@ h1, h2, h3, h4, h5, h6,
   border-radius: var(--border-radius) !important;
   border: 1px solid var(--border-color) !important;
   box-shadow: var(--shadow-card) !important;
-  transition: box-shadow var(--transition-base), transform var(--transition-base) !important;
+  background: var(--bg-card) !important;
+  transition: box-shadow var(--transition-base), transform var(--transition-base), background var(--transition-base), border-color var(--transition-base) !important;
 }
 
 .ant-card:hover {
@@ -170,6 +231,7 @@ h1, h2, h3, h4, h5, h6,
   border-bottom: 1px solid var(--border-color) !important;
   font-family: var(--font-display) !important;
   font-weight: 600 !important;
+  background: transparent !important;
 }
 
 .ant-statistic-title {

@@ -178,13 +178,14 @@ async function handleLogin() {
 /* Branding Side */
 .login-page__branding {
   width: 50%;
-  background: linear-gradient(135deg, var(--color-slate-900) 0%, var(--color-slate-950) 100%);
+  background: var(--bg-sidebar-gradient);
   padding: 60px 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  transition: background var(--transition-base);
 }
 
 .login-page__branding-content {
@@ -208,7 +209,7 @@ async function handleLogin() {
   font-family: var(--font-display);
   font-size: 3rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   line-height: 1.1;
   margin: 0 0 24px 0;
   letter-spacing: -0.02em;
@@ -216,7 +217,7 @@ async function handleLogin() {
 
 .login-page__tagline {
   font-size: 1.125rem;
-  color: var(--color-slate-400);
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0 0 48px 0;
 }
@@ -231,14 +232,14 @@ async function handleLogin() {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: var(--color-slate-300);
+  color: var(--text-secondary);
 }
 
 .login-page__feature-icon {
   width: 24px;
   height: 24px;
   background: rgb(245 158 11 / 0.2);
-  color: var(--color-amber-400);
+  color: var(--color-amber-500);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -282,7 +283,8 @@ async function handleLogin() {
   align-items: center;
   justify-content: center;
   padding: 60px;
-  background: var(--color-slate-900);
+  background: var(--bg-primary);
+  transition: background var(--transition-base);
 }
 
 .login-page__form-wrapper {
@@ -298,12 +300,12 @@ async function handleLogin() {
   font-family: var(--font-display);
   font-size: 1.75rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   margin: 0 0 8px 0;
 }
 
 .login-page__form-subtitle {
-  color: var(--color-slate-400);
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -313,36 +315,50 @@ async function handleLogin() {
 
 .login-page__form :deep(.ant-form-item-label > label) {
   font-weight: 500;
-  color: white;
+  color: var(--text-primary);
 }
 
 .login-page__form :deep(.ant-form-item-label > label.ant-form-item-required::before) {
-  color: var(--color-amber-400) !important;
+  color: var(--color-amber-500) !important;
 }
 
 .login-page__input {
-  height: 48px;
+  height: 48px !important;
+  min-height: 48px !important;
   border-radius: var(--border-radius-sm) !important;
-  background: var(--color-slate-800) !important;
-  border-color: var(--color-slate-700) !important;
+  background: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
 }
 
-.login-page__input :deep(.ant-input) {
-  font-size: 0.9375rem;
+.login-page__input:hover,
+.login-page__input:focus-within {
+  border-color: var(--accent-primary) !important;
+}
+
+.login-page__input :deep(.ant-input),
+.login-page__input :deep(.ant-input-affix-wrapper) {
+  font-size: 0.9375rem !important;
   background: transparent !important;
-  color: white !important;
+  color: var(--text-primary) !important;
+  height: 100% !important;
+}
+
+.login-page__input :deep(.ant-input-affix-wrapper) {
+  padding: 0 11px !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .login-page__input :deep(.ant-input::placeholder) {
-  color: var(--color-slate-500) !important;
+  color: var(--text-muted) !important;
 }
 
 .login-page__input :deep(.ant-input-password-icon) {
-  color: var(--color-slate-400) !important;
+  color: var(--text-secondary) !important;
 }
 
 .login-page__input-icon {
-  color: var(--color-slate-400);
+  color: var(--text-muted);
 }
 
 .login-page__forgot {
@@ -363,14 +379,24 @@ async function handleLogin() {
 
 .login-page__submit {
   height: 48px !important;
+  min-height: 48px !important;
   font-size: 1rem !important;
   font-weight: 600 !important;
   border-radius: var(--border-radius-sm) !important;
 }
 
+/* Ensure form items don't shift */
+.login-page__form :deep(.ant-form-item) {
+  margin-bottom: 20px;
+}
+
+.login-page__form :deep(.ant-form-item-control-input) {
+  min-height: 48px;
+}
+
 .login-page__footer {
   text-align: center;
-  color: var(--color-slate-400);
+  color: var(--text-secondary);
   font-size: 0.875rem;
   margin-top: 32px;
 }
